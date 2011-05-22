@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <AbsoluteLayout android:id="@+id/absoluteLayout1" android:layout_height="fill_parent" android:layout_width="fill_parent">
+        <TextView android:text="TextView" android:layout_width="100px" android:layout_height="50px" android:layout_x="186dip" android:layout_y="0dip" android:id="@+id/txtCas"></TextView>
+        <TextView android:text="TextView" android:layout_x="106dip" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_y="5dip"></TextView>
+        <View android:id="@+id/view1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_x="-1dip" android:layout_y="0dip"></View>
+    </AbsoluteLayout>
+</LinearLayout>

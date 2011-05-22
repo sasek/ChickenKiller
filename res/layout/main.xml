@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:background="@drawable/template_1" android:orientation="vertical" android:layout_gravity="bottom">
+    <AbsoluteLayout android:layout_height="fill_parent" android:id="@+id/absoluteLayout1" android:layout_width="match_parent">
+        <Button android:layout_width="100px" android:layout_height="50px" android:layout_x="182dip" android:layout_y="257dip" android:id="@+id/btnscore" android:background="@android:color/transparent" android:onClick="clickScore"></Button>
+        <Button android:layout_width="100px" android:layout_height="50px" android:layout_x="182dip" android:layout_y="201dip" android:id="@+id/btnstart" android:background="@android:color/transparent" android:onClick="clickStart"></Button>
+        <Button android:layout_width="100px" android:layout_height="50px" android:layout_x="182dip" android:layout_y="313dip" android:id="@+id/btnexit" android:background="@android:color/transparent" android:onClick="clickQuit"></Button>
+    </AbsoluteLayout>
+</LinearLayout>
