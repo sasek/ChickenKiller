@@ -32,18 +32,23 @@ public class Game extends Activity {
 	        touchView.setOnTouchListener(new View.OnTouchListener() { 
 	        @Override 
 	        public boolean onTouch(View v, MotionEvent event) {
+	        	if(event.getAction()==event.ACTION_DOWN)
+	        	{
 	        	if(bullet>0)
 	        	bullet--;
+	        	
 	        	else
 	        		
-	        	{// Se ne pokaže...
-	        		//Toast.makeText(Game.this, "Reload!!",Toast.LENGTH_SHORT);
-	        		bullet=5;
+	        		{
+	        			bullet=5;
+	        		}
 	        	}
 	        	textView.setText(""+bullet);
 	        /*textView.setText("Touch coordinates : " + 
 	        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY()));*/ 
-	        return true; 
+	        /*	textView.setText("Touch coordinates : " + 
+	        	        String.valueOf(event.getHistoricalX(0)) + "x" + String.valueOf(event.getHistoricalY(0)));*/
+	        	return true; 
 	        } 
 	        }); 
 	        
@@ -77,8 +82,10 @@ public class Odstevanje extends CountDownTimer{
 			min=0;
 		}
 		
-			
-	Game.count.setText(min+":"+s);
+			if(s>=10)
+				Game.count.setText(min+":"+s);
+			else
+				Game.count.setText(min+":0"+s);
 
 	}
 
