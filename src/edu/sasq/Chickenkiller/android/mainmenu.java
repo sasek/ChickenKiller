@@ -17,7 +17,7 @@ public class mainmenu extends Activity {
     }
     public void clickStart(View v)
     {
-    	Intent igra=new Intent(this,Game.class);
+    	Intent igra=new Intent(this,Tutorial2D.class);
     	this.startActivity(igra);
     }
     public void clickQuit(View v)

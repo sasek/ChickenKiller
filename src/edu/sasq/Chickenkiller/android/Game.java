@@ -3,6 +3,12 @@ package edu.sasq.Chickenkiller.android;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -12,7 +18,7 @@ import android.widget.TextView;
 public class Game extends Activity {
     static TextView count;
     public int bullet;
-	Odstevanje stej= new Odstevanje(120000,1000);
+//	Odstevanje stej= new Odstevanje(120000,1000);
 	
 	
 	
@@ -21,19 +27,29 @@ public class Game extends Activity {
 	        super.onCreate(savedInstanceState);
 	        bullet=5;
 	        setContentView(R.layout.game);
-	        stej.start();
-	        count=(TextView) findViewById(R.id.txtCas);
+	//       stej.start();
+	        //count=(TextView) findViewById(R.id.txtCas);
+	}
+}
 	        
 	        // Touch koordinate
-	        
+	    /*    
 	        final TextView textView = (TextView)findViewById(R.id.textView1); 
 	        // this is the view on which you will listen for touch events 
 	        final View touchView = findViewById(R.id.view1); 
+	        final Context con = this.getApplicationContext();
+	        
 	        touchView.setOnTouchListener(new View.OnTouchListener() { 
 	        @Override 
 	        public boolean onTouch(View v, MotionEvent event) {
 	        	if(event.getAction()==event.ACTION_DOWN)
-	        	{
+	        	{/*
+	        		Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.gabi48);
+	        		Canvas c = new Canvas(myBitmap);
+					c.drawBitmap(myBitmap, 100, 100, null);
+	        		DrawView ab= new DrawView(con);
+	        		Canvas canvas = new Canvas();
+	        		ab.draw(canvas);
 	        	if(bullet>0)
 	        	bullet--;
 	        	
@@ -47,15 +63,14 @@ public class Game extends Activity {
 	        /*textView.setText("Touch coordinates : " + 
 	        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY()));*/ 
 	        /*	textView.setText("Touch coordinates : " + 
-	        	        String.valueOf(event.getHistoricalX(0)) + "x" + String.valueOf(event.getHistoricalY(0)));*/
+	        	        String.valueOf(event.getHistoricalX(0)) + "x" + String.valueOf(event.getHistoricalY(0)));
 	        	return true; 
 	        } 
 	        }); 
 	        
 	 }
-	
-
-
+	*/
+	        /*
 public class Odstevanje extends CountDownTimer{
 
 	public Odstevanje(long millisInFuture, long countDownInterval) {
@@ -91,5 +106,5 @@ public class Odstevanje extends CountDownTimer{
 
 	}
 
-}
+}*/
 
