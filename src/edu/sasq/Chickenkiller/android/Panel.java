@@ -16,7 +16,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static float mWidth;
     public static float mHeight;
-    public int tocke;
+    public static int tocke;
     
     private ViewThread mThread;
     public static ArrayList<Element> mElements = new ArrayList<Element>();
@@ -31,13 +31,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         mPaint.setColor(Color.WHITE);
         tocke=0;
     }
-    
+    public static int dobiTocke()
+    {
+    	return tocke;
+    }
     public void doDraw(long elapsed, Canvas canvas) {
     	if(Tutorial2D.hitri)
     	{
     		Random rand= new Random();
 			int rnd= rand.nextInt((int)mHeight-80)+80;
 		 mElements.add(new Element(getResources(),(int)mWidth,(int)rnd,30,-3,0));
+		 mElements.add(new Element(getResources(),(int)mWidth,(int)rnd-25,-3,0,true));
 		 Tutorial2D.hitri=false;
     	}
     	if(Tutorial2D.pocasni)
@@ -97,17 +101,13 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
            for( i=0;i<mElements.size();i++) 
            {
         	   Element a = mElements.get(i);
-        	   
-        	//float y= Math.abs(event.getY()-a.getY());
-        	//float x= Math.abs(event.getX()-a.getX());
-        	//Log.d("Vrednost Y:", ""+x);
-        	//Log.d("Vrednost x:", ""+y);
-        	 // Math.abs(event.getX()-a.getX());
-        			   //if((int)event.getY()==a.getY()&&(int)event.getX()+i==a.getX())
                    if( (Math.abs(event.getY()-(a.getY()+a.slikaY))<30.0)&&(Math.abs(event.getX()-(a.getX()+a.slikaY))<30.0))		
         	  {
+                	  
                    //Log.d("Izbris v polju:", "y od eventa"+event.getY()+"y od slike"+a.getY());
         		   tocke+=mElements.get(i).getPoints(); 
+        		   if(tocke<0)
+        			   tocke=0;
         		   mElements.remove(i);
         	  }
         		   
@@ -125,11 +125,11 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
         		 Element a = mElements.get(i);
                 a.animate(elapsedTime);
                 if(Tutorial2D.yspeed)
-                {
+                {/*
                 	if(a.mSpeedY<=1.5)
                 		a.mSpeedY=-1.5;
                 	else
-                		a.mSpeedY=1.5;
+                		a.mSpeedY=1.5;*/
                
                 }
                 //Tutorial2D.yspeed=false;

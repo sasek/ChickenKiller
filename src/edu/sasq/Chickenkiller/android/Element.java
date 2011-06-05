@@ -16,11 +16,11 @@ public class Element {
     
     public double mSpeedX;
     public double mSpeedY;
-    
+    public  boolean killer;
     private Bitmap mBitmap;
     
     public Element(Resources res, int x, int y, int p) {
-        mBitmap = BitmapFactory.decodeResource(res, R.drawable.tst);
+        mBitmap = BitmapFactory.decodeResource(res, R.drawable.finish);
         mX = x - mBitmap.getWidth();
         mY = y - mBitmap.getHeight();
         slikaX=mBitmap.getWidth()/ 2;
@@ -28,6 +28,7 @@ public class Element {
         points=p;
         mSpeedX = 1;
         mSpeedY = 0;
+        killer=false;
     }
     public Element(Resources res, int x, int y, int p,double sX,double sY) {
         mBitmap = BitmapFactory.decodeResource(res, R.drawable.finish);
@@ -38,7 +39,20 @@ public class Element {
         mSpeedY = sY;
         slikaX=mBitmap.getWidth()/ 2;
         slikaY=mBitmap.getHeight()/ 2;
-    }/*
+        killer=false;
+    }
+    public Element(Resources res, int x, int y, double sX,double sY, boolean kill) {
+        mBitmap = BitmapFactory.decodeResource(res, R.drawable.dontkill);
+        mX = x + (mBitmap.getWidth() / 2);
+        mY = y + (mBitmap.getHeight() / 2);
+        mSpeedX = sX;
+        mSpeedY = sY;
+        points=-35;
+        killer=true;
+        slikaX=mBitmap.getWidth()/ 2;
+        slikaY=mBitmap.getHeight()/ 2;
+    }
+    /*
     public  Element(Resources res, int x, int y) {
         mBitmap = BitmapFactory.decodeResource(res, R.drawable.finish);
         mX = x - (mBitmap.getWidth() / 2);
