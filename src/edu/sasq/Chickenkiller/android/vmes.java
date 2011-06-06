@@ -2,6 +2,7 @@ package edu.sasq.Chickenkiller.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,11 +11,15 @@ import android.widget.Toast;
 public class vmes extends Activity{
 
 	EditText uredi;
+	ApplicationExample app;
 	@Override
 	 public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.vmes);
+	        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			app = (ApplicationExample) this.getApplication();
 	        uredi = (EditText) findViewById(R.id.editText1);
+	        uredi.setText(app.ime_privzeto);
 	 }
 	
 	public void btnbegin(View v)

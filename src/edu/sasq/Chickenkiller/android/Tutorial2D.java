@@ -25,6 +25,7 @@ public class Tutorial2D extends Activity {
 	Panel  app;
 	Context ab;
 	public static boolean cancel;
+	public static boolean arry;
 	public static boolean hitri;
 	public static boolean pocasni;
 	public static boolean yspeed;
@@ -35,10 +36,12 @@ public class Tutorial2D extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(new Panel(this));
+        
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         stej.start();
         cancel=false;
         ab=this;
+        arry=true;
         app2 = (ApplicationExample) getApplication(); //Step 4.4
         Panel.mHeight=100;
         Panel.mWidth=40;
@@ -59,11 +62,15 @@ public class Odstevanje extends CountDownTimer{
 
 	@Override
 	public void onFinish() {
+		if(arry)
+		{
 		rezultat a= new rezultat(app.dobiTocke(),player_name);
 		app2.add(a);
 		Intent moj2=new Intent(ab,StevecListActivity.class);
 		ab.startActivity(moj2);
 		finish();
+		}
+		arry=false;
 		
 	}
 

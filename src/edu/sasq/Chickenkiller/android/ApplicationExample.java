@@ -9,6 +9,7 @@ public class ApplicationExample extends Application {
 	//Step 4.1
 	//Step 4.2 popravi AndroidManifest.xml
 	public ArrayList<rezultat> lista;
+	public static String ime_privzeto="Default";
 	StevecArrayAdapter rezultati; //Step 4.9 Globalna lista
 
 	DBAdapterStevec db;
@@ -24,8 +25,9 @@ public class ApplicationExample extends Application {
 	}	
 
 	public  void add(rezultat a) {
-		rezultati.add(a);
-		addDB(a);	}
+		lista.add(a);
+		addDB(a);	
+		}
 	public void fillFromDB() {
 		db.open();
 		Cursor c = db.getAll();

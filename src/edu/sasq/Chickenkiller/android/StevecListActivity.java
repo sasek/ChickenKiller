@@ -1,6 +1,7 @@
 package edu.sasq.Chickenkiller.android;
 
 import android.app.ListActivity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,8 +13,8 @@ public class StevecListActivity extends ListActivity/* implements OnItemClickLis
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Step 4.7  naredite 2 LL enega za Activity z listo in enega za vrstico
 		setContentView(R.layout.stevec_list_activity);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		app = (ApplicationExample) getApplication();
 		setListAdapter(app.rezultati);
 		//this.getListView().setOnItemClickListener(this);
