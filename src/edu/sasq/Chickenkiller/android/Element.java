@@ -9,10 +9,12 @@ import android.graphics.Canvas;
 
 public class Element {
     private float mX;
-    private float mY;
+    public float mY;
     private int points;
     public float slikaX;
     public float slikaY;
+    public  float topX;
+    public float topY;
     
     public double mSpeedX;
     public double mSpeedY;
@@ -21,8 +23,8 @@ public class Element {
     
     public Element(Resources res, int x, int y, int p) {
         mBitmap = BitmapFactory.decodeResource(res, R.drawable.finish);
-        mX = x - mBitmap.getWidth();
-        mY = y - mBitmap.getHeight();
+        mX = x + (mBitmap.getWidth() / 2);
+        mY = y +  (mBitmap.getHeight() / 2);
         slikaX=mBitmap.getWidth()/ 2;
         slikaY=mBitmap.getHeight()/ 2;
         points=p;
@@ -51,6 +53,22 @@ public class Element {
         killer=true;
         slikaX=mBitmap.getWidth()/ 2;
         slikaY=mBitmap.getHeight()/ 2;
+    }
+    public Element(Resources res, int x, int y)
+    {
+    	mBitmap=BitmapFactory.decodeResource(res, R.drawable.tank);
+    	 mX = x + (mBitmap.getWidth() / 2);
+         mY = y + (mBitmap.getHeight() / 2);
+         topX=x+(mBitmap.getWidth()/2)+12;
+         topY=y+10;
+    }
+    public Element(Resources res, int x, int y, double sX,double sY)
+    {
+    	mBitmap = BitmapFactory.decodeResource(res, R.drawable.metek);
+        mX = x + (mBitmap.getWidth() / 2);
+        mY = y + (mBitmap.getHeight() / 2);
+        mSpeedX = sX;
+        mSpeedY = sY;
     }
     /*
     public  Element(Resources res, int x, int y) {
@@ -82,6 +100,8 @@ public class Element {
     public void animate(long elapsedTime) {
         mX += mSpeedX * (elapsedTime / 20f);
         mY += mSpeedY * (elapsedTime / 20f);
+       // topY+= mSpeedX * (elapsedTime / 20f);
+       // topX+= mSpeedY * (elapsedTime / 20f);
        // checkBorders();
     }
 

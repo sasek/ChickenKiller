@@ -14,7 +14,7 @@ public class StevecListActivity extends ListActivity/* implements OnItemClickLis
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stevec_list_activity);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		app = (ApplicationExample) getApplication();
 		setListAdapter(app.rezultati);
 		//this.getListView().setOnItemClickListener(this);

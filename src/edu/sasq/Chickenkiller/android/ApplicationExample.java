@@ -10,6 +10,7 @@ public class ApplicationExample extends Application {
 	//Step 4.2 popravi AndroidManifest.xml
 	public ArrayList<rezultat> lista;
 	public static String ime_privzeto="Default";
+	public static int tocke=0;
 	StevecArrayAdapter rezultati; //Step 4.9 Globalna lista
 
 	DBAdapterStevec db;
@@ -23,7 +24,10 @@ public class ApplicationExample extends Application {
         rezultati = new StevecArrayAdapter(this, R.layout.stevec_layout,lista); //Step 4.10 Globalna lista
    
 	}	
-
+	public void dobi(rezultat a){
+		ime_privzeto=a.getIme();
+		tocke=a.getPoints();
+	}
 	public  void add(rezultat a) {
 		lista.add(a);
 		addDB(a);	

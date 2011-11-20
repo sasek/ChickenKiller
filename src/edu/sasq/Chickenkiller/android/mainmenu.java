@@ -26,8 +26,9 @@ public class mainmenu extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = (ApplicationExample) getApplication();
+        
     }
     public boolean onCreateOptionsMenu(Menu menu) {
 

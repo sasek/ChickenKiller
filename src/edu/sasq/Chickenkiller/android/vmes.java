@@ -16,7 +16,7 @@ public class vmes extends Activity{
 	 public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.vmes);
-	        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+	        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			app = (ApplicationExample) this.getApplication();
 	        uredi = (EditText) findViewById(R.id.editText1);
 	        uredi.setText(app.ime_privzeto);

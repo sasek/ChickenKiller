@@ -15,11 +15,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.DisplayMetrics;
 import android.view.Window;
 
 public class Tutorial2D extends Activity {
     /** Called when the activity is first created. */
-	//private static final int TEST_LIST_ACTIVITY_ID = 2;  //Step 4.12
 	public ApplicationExample app2;
 	public static String player_name="";
 	Panel  app;
@@ -29,24 +29,32 @@ public class Tutorial2D extends Activity {
 	public static boolean hitri;
 	public static boolean pocasni;
 	public static boolean yspeed;
+	public static boolean strelaj;
 	public static  String timer =" ";
-	public  Odstevanje stej= new Odstevanje(30000,1000);
+	public static int velikostX;
+	public static int velikostY;
+	public final  Odstevanje stej= new Odstevanje(30000,1000);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(new Panel(this));
-        
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         stej.start();
         cancel=false;
         ab=this;
         arry=true;
         app2 = (ApplicationExample) getApplication(); //Step 4.4
-        Panel.mHeight=100;
-        Panel.mWidth=40;
+        Panel.mHeight=dm.heightPixels;
+        Panel.mWidth=dm.widthPixels;
+        velikostX=dm.heightPixels;
+        velikostY=dm.widthPixels;
+       System.out.println("height :"+dm.heightPixels+" width"+dm.widthPixels);
         hitri=false;
         pocasni=false;
+        strelaj=false;
         
     }
     public static  String getTimer()
@@ -56,8 +64,10 @@ public class Tutorial2D extends Activity {
 
 public class Odstevanje extends CountDownTimer{
 
+	private boolean stop;
 	public Odstevanje(long millisInFuture, long countDownInterval) {
 	super(millisInFuture, countDownInterval);
+	setStop(false);
 	}
 
 	@Override
@@ -66,11 +76,15 @@ public class Odstevanje extends CountDownTimer{
 		{
 		rezultat a= new rezultat(app.dobiTocke(),player_name);
 		app2.add(a);
+		app2.dobi(a);
 		Intent moj2=new Intent(ab,StevecListActivity.class);
 		ab.startActivity(moj2);
 		finish();
+		Panel.mElements.clear();
+		Panel.poljeMetki.clear();
 		}
 		arry=false;
+		
 		
 	}
 
@@ -78,12 +92,16 @@ public class Odstevanje extends CountDownTimer{
 
 	@Override
 	public void onTick(long millisUntilFinished) {
-		
+		if(stop)
+		{
+			this.cancel();
+		}
 		long s=0;
-		int min=0;
-		int visina= (int)Panel.mHeight;
-		int sirina= (int)Panel.mWidth;
-			
+		int min=0;			
+		if(millisUntilFinished%2==0)
+			strelaj=true;
+		else
+			strelaj=false;
 		if(millisUntilFinished%2==0)
 		{
 			if(cancel)
@@ -92,13 +110,7 @@ public class Odstevanje extends CountDownTimer{
 				stej.cancel();
 			}
 			hitri=true;
-			
-			/*
-			Random rand= new Random();
-			int rnd= rand.nextInt(visina-80)+80;
-		 Panel.mElements.add(new Element(getResources(),(int)sirina,(int)rnd,30,-3,0));
-		
-		*/}
+			}
 		else
 		{
 			hitri=false;
@@ -112,11 +124,6 @@ public class Odstevanje extends CountDownTimer{
 			yspeed=false;
 		
 		pocasni=true;
-		/*	
-			Random rand= new Random();
-			int rnd= rand.nextInt(visina-80)+80;
-		 Panel.mElements.add(new Element(getResources(),0,(int)rnd,10));
-		*/
 		if(millisUntilFinished/60000==1)
 		{
 		min=1;
@@ -133,6 +140,14 @@ public class Odstevanje extends CountDownTimer{
 			else
 			timer=min+":0"+s;
 
+	}
+
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
+
+	public boolean isStop() {
+		return stop;
 	}
 
 	}
