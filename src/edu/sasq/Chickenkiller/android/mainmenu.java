@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ public class mainmenu extends Activity {
 	private Menu mMenu;  //ni nujno
 	public static final int GAME_ACTIVITY_ID = 1;
 	private static final int EXIT_DIALOG = 0;
+	public static int velikostX;
+	public static int velikostY;
     @Override
     
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,10 @@ public class mainmenu extends Activity {
         setContentView(R.layout.main);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = (ApplicationExample) getApplication();
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Panel.mHeight=dm.heightPixels;
+        Panel.mWidth=dm.widthPixels;
         
     }
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,25 +1,28 @@
 package edu.sasq.Chickenkiller.android;
 
 
-import java.util.Random;
 
 import edu.sasq.Chickenkiller.android.ApplicationExample;
 import edu.sasq.Chickenkiller.android.StevecListActivity;
 import edu.sasq.Chickenkiller.android.rezultat;
 
-import android.R.string;
+
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.DisplayMetrics;
 import android.view.Window;
 
 public class Tutorial2D extends Activity {
     /** Called when the activity is first created. */
+	private SensorManager sSensorManager;
+	
 	public ApplicationExample app2;
 	public static String player_name="";
 	Panel  app;
@@ -31,27 +34,43 @@ public class Tutorial2D extends Activity {
 	public static boolean yspeed;
 	public static boolean strelaj;
 	public static  String timer =" ";
-	public static int velikostX;
-	public static int velikostY;
+	private SensorEventListener sSensorListener = new SensorEventListener() {
+
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			float cx = event.values[2];
+			if(cx<=-5&&cx>-20)
+				Panel.senzor=1;
+			else if(cx>=5&&cx<20)
+				Panel.senzor=-1;
+			else if(cx>=20&&cx<=35)
+				Panel.senzor=-2;
+			else if(cx>35&&cx<=90)
+				Panel.senzor=-3;
+			else if(cx<=-20&&cx>-35)
+				Panel.senzor=2;
+			else if(cx<=-35&&cx>-90)
+				Panel.senzor=3;
+			else Panel.senzor=0;
+		}
+
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		}
+	};
 	public final  Odstevanje stej= new Odstevanje(30000,1000);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(new Panel(this));
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        sSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         stej.start();
         cancel=false;
         ab=this;
         arry=true;
         app2 = (ApplicationExample) getApplication(); //Step 4.4
-        Panel.mHeight=dm.heightPixels;
-        Panel.mWidth=dm.widthPixels;
-        velikostX=dm.heightPixels;
-        velikostY=dm.widthPixels;
-       System.out.println("height :"+dm.heightPixels+" width"+dm.widthPixels);
         hitri=false;
         pocasni=false;
         strelaj=false;
@@ -151,5 +170,16 @@ public class Odstevanje extends CountDownTimer{
 	}
 
 	}
+@Override
+protected void onResume() {
+	super.onResume();
+	sSensorManager.registerListener(sSensorListener, sSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION | Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
+}
+
+@Override
+protected void onStop() {
+	sSensorManager.unregisterListener(sSensorListener);
+	super.onStop();
+}
 }
 

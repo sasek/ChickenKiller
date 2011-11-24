@@ -56,11 +56,12 @@ public class Element {
     }
     public Element(Resources res, int x, int y)
     {
-    	mBitmap=BitmapFactory.decodeResource(res, R.drawable.tank);
+    	mBitmap=BitmapFactory.decodeResource(res, R.drawable.tank); 
     	 mX = x + (mBitmap.getWidth() / 2);
          mY = y + (mBitmap.getHeight() / 2);
-         topX=x+(mBitmap.getWidth()/2)+12;
-         topY=y+10;
+         topX=mX+(mBitmap.getWidth()/2)+12;
+         topY=mY+10;
+   
     }
     public Element(Resources res, int x, int y, double sX,double sY)
     {
@@ -70,14 +71,12 @@ public class Element {
         mSpeedX = sX;
         mSpeedY = sY;
     }
-    /*
-    public  Element(Resources res, int x, int y) {
-        mBitmap = BitmapFactory.decodeResource(res, R.drawable.finish);
-        mX = x - (mBitmap.getWidth() / 2);
-        mY = y - (mBitmap.getHeight() / 2);
-        mSpeedX = 0.5;
-        mSpeedY = 0;
-    }*/
+    public Element(Resources res)
+    {
+    	mBitmap=BitmapFactory.decodeResource(res, R.drawable.tank);
+    	slikaX=mBitmap.getWidth();
+        slikaY=mBitmap.getHeight();
+    }
     public float getX()
     {
     	return mX;
