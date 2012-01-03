@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="bottom"  android:gravity="bottom" android:background="@drawable/ozadje">
+    android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="bottom"  android:gravity="bottom" android:background="@drawable/ozadje" android:weightSum="1">
     <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:weightSum="1">
+        <ImageView android:layout_weight="0.11" android:layout_height="match_parent" android:layout_width="67dp" android:id="@+id/imageView1" android:src="@drawable/clear"></ImageView>
         <Button android:text="Start" android:textColor="@color/Crna" android:background="@android:color/transparent" android:layout_marginRight="30px" android:layout_weight="0.15" android:layout_width="100px" android:id="@+id/btnstart" android:onClick="clickStart" android:layout_height="76dp" android:textSize="35px"></Button>
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:weightSum="1">

@@ -1,6 +1,11 @@
 package edu.sasq.Chickenkiller.android;
 
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import edu.sasq.Chickenkiller.android.MenuPreferences;
 import edu.sasq.Chickenkiller.android.R;
 import edu.sasq.Chickenkiller.android.StevecListActivity;
@@ -13,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class mainmenu extends Activity {
@@ -29,8 +35,20 @@ public class mainmenu extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        ImageView ab= (ImageView)findViewById(R.id.imageView1);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = (ApplicationExample) getApplication();
+       /* String slika=vreme();
+        if(slika.contains("Partly")&&slika.contains("Cloudy"))
+        {
+        	ab.setImageResource(R.drawable.partlycloudy);
+        }
+        if(slika.contains("Clear"))
+        	ab.setImageResource(R.drawable.clear);
+        if(slika.contains("Chance")&&slika.contains("Rain")||slika.contains("Rain"))
+        	ab.setImageResource(R.drawable.chancerain);
+        if(slika.contains("Chance")&&slika.contains("Snow")||slika.contains("Snow"))
+        	ab.setImageResource(R.drawable.chancesnow);*/
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         Panel.mHeight=dm.heightPixels;
@@ -131,5 +149,41 @@ public class mainmenu extends Activity {
 	}
 	
 }
+ // Inegracijsko
+    private static final String SOAP_ACTION = "Kure";
+    private static final String OPERATION_NAME = "slika";
+    private static final String WSDL_TARGET_NAMESPACE = "http://vreme.edu.sasq";
+    private static final String SOAP_ADDRESS = "http://164.8.118.248:8080/Domaca/services/Kure?wsdl";  
+
+    public String vreme(){
+    	
+
+    SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE
+    ,OPERATION_NAME);
+
+    String izhod;
+               
+    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+    envelope.dotNet = false;
+              
+    envelope.setOutputSoapObject(request);
+               
+               
+    HttpTransportSE httpTransport = new HttpTransportSE(SOAP_ADDRESS);
+                       
+     try     
+     {              
+            httpTransport.call(SOAP_ACTION, envelope);              
+            final Object response = envelope.getResponse();
+            izhod=response.toString();
+            return izhod;
+     }
+     catch (final Exception exception)
+     {
+          exception.printStackTrace();
+     }
+    return null;
+
+    }
     
 }
