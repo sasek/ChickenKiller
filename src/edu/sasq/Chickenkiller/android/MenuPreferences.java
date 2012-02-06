@@ -21,7 +21,7 @@ public class MenuPreferences extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	       this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+	       this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		app = (ApplicationExample) this.getApplication();
 		addPreferencesFromResource(R.xml.menu_prefrences);
  
@@ -33,7 +33,7 @@ public class MenuPreferences extends PreferenceActivity {
 		isOK = settings.getBoolean(PREF_ISOK, true);
 		//Toast.makeText(app, "isOK:"+isOK, Toast.LENGTH_LONG).show();
 		frequency =  Integer.parseInt(settings.getString(PREF_FREQENCY, "25"));
-		debug_location = settings.getString(PREF_DEBUG_LOCATION, "localhost");
+		debug_location = settings.getString(PREF_DEBUG_LOCATION, "Default");
 		app.ime_privzeto=debug_location;
 	}
 }

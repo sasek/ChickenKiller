@@ -1,9 +1,13 @@
 package edu.sasq.Chickenkiller.android;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import edu.sasq.Chickenkiller.android.*;
+import android.R.array;
 import android.app.Application;
 import android.database.Cursor;
+import android.widget.ArrayAdapter;
 
 public class ApplicationExample extends Application {
 	//Step 4.1
@@ -31,6 +35,7 @@ public class ApplicationExample extends Application {
 	public  void add(rezultat a) {
 		lista.add(a);
 		addDB(a);	
+		sort();
 		}
 	public void fillFromDB() {
 		db.open();
@@ -43,6 +48,7 @@ public class ApplicationExample extends Application {
 			tmp.setDbID(c.getLong(DBAdapterStevec.POS__ID));
 			lista.add(tmp); 
 		}
+		sort();
 		c.close();
 		db.close();
 	}
@@ -54,5 +60,19 @@ public class ApplicationExample extends Application {
 	public void remove(rezultat a) {
 		if (a!=null)
 		rezultati.remove(a);  
+	}
+	public void sort()
+	{
+		int n = lista.size();
+	    for (int pass=1; pass < n; pass++) {  // count how many times
+	        // This next loop becomes shorter and shorter
+	        for (int i=0; i < n-pass; i++) {
+	            if (lista.get(i).getPoints() < lista.get(i+1).getPoints()) {
+	                // exchange elements
+	               // rezultat temp = lista.get(i);  x[i] = x[i+1];  x[i+1] = temp;
+	                rezultat temp = lista.get(i);   lista.set(i, lista.get(i+1)); lista.set(i+1, temp);
+	            }
+	        }
+	    }
 	}
 }

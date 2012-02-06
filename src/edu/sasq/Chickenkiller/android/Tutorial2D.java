@@ -10,6 +10,7 @@ import edu.sasq.Chickenkiller.android.StevecListActivity;
 import edu.sasq.Chickenkiller.android.rezultat;
 
 import android.app.Activity;
+import android.app.WallpaperInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -19,12 +20,14 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PowerManager;
+import android.os.Vibrator;
 import android.view.Window;
+import android.view.WindowManager;
 
 public class Tutorial2D extends Activity {
 	/** Called when the activity is first created. */
 	private SensorManager sSensorManager;
-
 	public ApplicationExample app2;
 	public static String player_name = "";
 	Panel app;
@@ -35,7 +38,9 @@ public class Tutorial2D extends Activity {
 	public static boolean pocasni;
 	public static boolean yspeed;
 	public static boolean strelaj;
+	public static boolean vibriraj;
 	public boolean koncaj;
+	public static Vibrator v;
 	public static Thread nitkica;
 	public static String timer = " ";
 	private SensorEventListener sSensorListener = new SensorEventListener() {
@@ -76,7 +81,7 @@ public class Tutorial2D extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(new Panel(this));
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		stej = new Odstevanje(30000, 1000);
 		koncaj = false;
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -90,6 +95,9 @@ public class Tutorial2D extends Activity {
 		pocasni = false;
 		strelaj = false;
 		Panel.konec = false;
+		 vibriraj=false;
+		 v= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		setContentView(new Panel(this));
 		nitkica = new Thread(new Runnable() {
 
 			@Override
@@ -105,6 +113,11 @@ public class Tutorial2D extends Activity {
 						Panel.mElements.clear();
 						Panel.poljeMetki.clear();
 						arry = false;
+					}
+					if(vibriraj)
+					{
+						v.vibrate(200);
+						vibriraj=false;
 					}
 					if (koncaj) {
 						arry = false;

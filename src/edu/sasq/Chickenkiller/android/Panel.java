@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Picture;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -72,7 +73,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			timeNow = System.currentTimeMillis();
 			timeNow2 = System.currentTimeMillis();
 			if (timeNow - timeBefor > 500) {
-				if (mWidth == 480)
+				if (mWidth >= 480)
 					poljeMetki.add(new Element(getResources(), (int) tank
 							.getX() + 12, (int) tank.getY(), 0, -4.5));
 				if (bonusMetki) {
@@ -98,7 +99,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				}
 				timeBefor = timeNow;
 				Random x = new Random();
-				int index = x.nextInt(mElements.size() - 1);
+				int index = x.nextInt(mElements.size());
 				mElements.get(index).mSpeedY = 2.5;
 				mElements.get(index).mSpeedX = -1 - x.nextDouble();
 
@@ -218,7 +219,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 						Element a = mElements.get(i);
 						a.animate(elapsedTime);
 						if (a.getX() + a.slikaX * 2 <= 0
-								|| a.getX() - a.slikaX >= Panel.mWidth) {
+								|| a.getX() - a.slikaX >= mWidth||a.getY() + a.slikaY * 2 <= 0||a.getY() - a.slikaY >= mHeight) {
 							mElements.remove(i);
 						}
 						colision(a, i);
@@ -258,6 +259,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				mElements.remove(i);
 				tocke += mElements.get(i).getPoints();
 				healthBar -= 50;
+				Tutorial2D.vibriraj=true;
 			}
 			if (health != null) {
 				if ((Math.abs(health.getY() - tank.getY() - 10) < 70.0)

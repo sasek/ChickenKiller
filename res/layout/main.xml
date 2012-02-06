@@ -3,13 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:orientation="vertical" android:layout_gravity="bottom"  android:gravity="bottom" android:background="@drawable/ozadje" android:weightSum="1">
     <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:weightSum="1">
-        <ImageView android:layout_weight="0.11" android:layout_height="match_parent" android:layout_width="67dp" android:id="@+id/imageView1" android:src="@drawable/clear"></ImageView>
-        <Button android:text="Start" android:textColor="@color/Crna" android:background="@android:color/transparent" android:layout_marginRight="30px" android:layout_weight="0.15" android:layout_width="100px" android:id="@+id/btnstart" android:onClick="clickStart" android:layout_height="76dp" android:textSize="35px"></Button>
+        <Button android:textColor="@color/Crna" android:background="@android:color/transparent" android:layout_marginRight="30px" android:layout_weight="0.15" android:layout_width="100px" android:id="@+id/btnstart" android:onClick="clickStart" android:layout_height="76dp" android:textSize="35px" android:text="Start"></Button>
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:weightSum="1">
-        <Button android:onClick="clickScore" android:layout_width="100px" android:background="@android:color/transparent" android:id="@+id/btnscore" android:layout_marginRight="30px" android:text="Scores" android:layout_weight="0.13" android:layout_height="60dp" android:textColor="@color/Crna" android:textSize="35px"></Button>
+        <Button android:onClick="clickScore" android:layout_width="100px" android:background="@android:color/transparent" android:id="@+id/btnscore" android:layout_marginRight="30px" android:layout_weight="0.13" android:layout_height="60dp" android:textColor="@color/Crna" android:textSize="35px" android:text="Score"></Button>
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout3" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:weightSum="1">
-        <Button android:text="Exit" android:textColor="@color/Crna" android:background="@android:color/transparent" android:layout_marginRight="30px" android:layout_weight="0.11" android:layout_width="100px" android:id="@+id/btnexit" android:onClick="clickQuit" android:layout_height="51dp" android:textSize="35px"></Button>
+        <Button android:textColor="@color/Crna" android:background="@android:color/transparent" android:layout_marginRight="30px" android:layout_weight="0.11" android:layout_width="100px" android:id="@+id/btnexit" android:onClick="clickQuit" android:layout_height="51dp" android:textSize="35px" android:text="Exit"></Button>
     </LinearLayout>
 </LinearLayout>

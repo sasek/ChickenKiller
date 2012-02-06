@@ -10,14 +10,17 @@ import edu.sasq.Chickenkiller.android.MenuPreferences;
 import edu.sasq.Chickenkiller.android.R;
 import edu.sasq.Chickenkiller.android.StevecListActivity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,7 +38,8 @@ public class mainmenu extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        ImageView ab= (ImageView)findViewById(R.id.imageView1);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+   //     ImageView ab= (ImageView)findViewById(R.id.imageView1);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         app = (ApplicationExample) getApplication();
        /* String slika=vreme();
@@ -112,12 +116,14 @@ public class mainmenu extends Activity {
     {
 
     	Intent igra=new Intent(this,vmes.class);
+
     	this.startActivity(igra);
   
     }
     public void clickQuit(View v)
     {
     	this.finish();
+  
     	
     }
     public void clickScore(View v)
