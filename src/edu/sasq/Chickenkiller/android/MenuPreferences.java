@@ -5,8 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
-import android.R.xml;
 
 public class MenuPreferences extends PreferenceActivity {
 	public static final String TAG = "MenuPreferences";
@@ -18,6 +16,7 @@ public class MenuPreferences extends PreferenceActivity {
 	public static boolean isOK=true;
 	public static int frequency=25;
 	public static String debug_location="Default";
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

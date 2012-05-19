@@ -30,6 +30,7 @@ private long mElapsed;
                 mPanel.doDraw(mElapsed, canvas);
                 mElapsed = System.currentTimeMillis() - mStartTime;
                 mHolder.unlockCanvasAndPost(canvas);
+               mRun= mPanel.finish();
             }
             mStartTime = System.currentTimeMillis();
         }

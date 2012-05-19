@@ -4,9 +4,6 @@ import android.app.ListActivity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 //Step 4.6
 public class StevecListActivity extends ListActivity/* implements OnItemClickListener  */{
 	ApplicationExample app;

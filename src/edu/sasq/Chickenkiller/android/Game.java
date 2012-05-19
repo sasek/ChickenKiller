@@ -3,16 +3,7 @@ package edu.sasq.Chickenkiller.android;
 
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
 public class Game extends Activity {

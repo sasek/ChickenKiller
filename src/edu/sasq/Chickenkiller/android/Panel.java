@@ -12,11 +12,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class Panel extends SurfaceView implements SurfaceHolder.Callback {
+public class Panel extends SurfaceView implements SurfaceHolder.Callback
+{
 
 	public Context Context2;
 	public static long timeNow;
@@ -24,7 +24,6 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	public static long timeBefor;
 	public static long timeBefor2;
 	public long metkiOn;
-	public long metkiOff;
 	public static int mWidth;
 	public static int mHeight;
 	public static int tocke;
@@ -46,10 +45,11 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private Paint mPaint = new Paint();
 	public Paint barvaLifa = new Paint();
 
-	public Panel(Context context,Application app3) {
+	public Panel(Context context, Application app3)
+	{
 		super(context);
-		app2 =(ApplicationExample) app3;
-		Context2=context;
+		app2 = (ApplicationExample) app3;
+		Context2 = context;
 		getHolder().addCallback(this);
 		slika = BitmapFactory.decodeResource(getResources(), R.drawable.snow2);
 		bonusMetki = false;
@@ -67,46 +67,44 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				(int) (mHeight - tankx.slikaY - tankx.slikaY));
 	}
 
-	public static int dobiTocke() {
+	public static int dobiTocke()
+	{
 		return tocke;
 	}
 
-	public void doDraw(long elapsed, Canvas canvas) {
-		
-		if (Panel.konec) {
-			rezultat a = new rezultat(dobiTocke(), "test");
-			app2.add(a);
-			app2.dobi(a);
-			Intent moj2 = new Intent(Context2, StevecListActivity.class);
-			Context2.startActivity(moj2);
-			((Activity) Context2).finish();
-			Panel.mElements.clear();
-			Panel.poljeMetki.clear();
-		}
-		try {
+	public void doDraw(long elapsed, Canvas canvas)
+	{
+		try
+		{
 			tank.mSpeedX = senzor;
 			tank.mSpeedY = sensorY;
 			timeNow = System.currentTimeMillis();
 			timeNow2 = System.currentTimeMillis();
-			if (timeNow - timeBefor > 500) {
+			if (timeNow - timeBefor > 500)
+			{
 				if (mWidth >= 480)
 					poljeMetki.add(new Element(getResources(), (int) tank
 							.getX() + 12, (int) tank.getY(), 0, -4.5));
-				if (bonusMetki) {
-					if (metkiOn + 5000 >= System.currentTimeMillis()) {
+				if (bonusMetki)
+				{
+					if (metkiOn + 5000 >= System.currentTimeMillis())
+					{
 						poljeMetki.add(new Element(getResources(), (int) tank
 								.getX() + 12, (int) tank.getY(), -2, -4.5));
 						poljeMetki.add(new Element(getResources(), (int) tank
 								.getX() + 12, (int) tank.getY(), 2, -4.5));
-					} else
+					}
+					else
 						bonusMetki = false;
 
 				}
 				if (mWidth < 480)
 					poljeMetki.add(new Element(getResources(), (int) tank
 							.getX(), (int) tank.getY(), 0, -4.5));
-				if (bonusMetki) {
-					if (metkiOn + 5000 <= System.currentTimeMillis()) {
+				if (bonusMetki)
+				{
+					if (metkiOn + 5000 <= System.currentTimeMillis())
+					{
 						poljeMetki.add(new Element(getResources(), (int) tank
 								.getX() + 12, (int) tank.getY(), -2, -4.5));
 						poljeMetki.add(new Element(getResources(), (int) tank
@@ -125,7 +123,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				mElements.get(index2).mSpeedX = 2 + x2.nextDouble();
 
 			}
-			if (timeNow2 - timeBefor2 > 1200) {
+			if (timeNow2 - timeBefor2 > 1200)
+			{
 				timeBefor2 = timeNow2;
 				Random rand = new Random();
 				int rnd = rand.nextInt((int) (mHeight - (tankx.slikaY * 4))) + 40;
@@ -135,22 +134,28 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				mElements.add(new Element(getResources(), (int) rnd, 0 - 10,
 						10, -0.2, 4));
 			}
-			// canvas.drawColor(Color.WHITE);
 			canvas.drawBitmap(slika, 0, 0, null);
-			synchronized (mElements) {
-				if (health != null) {
+			synchronized (mElements)
+			{
+				if (health != null)
+				{
 					health.doDraw(canvas);
 				}
-				if (ammo != null) {
+				if (ammo != null)
+				{
 					ammo.doDraw(canvas);
 				}
-				if (mElements.isEmpty() == false) {
+				if (mElements.isEmpty() == false)
+				{
 					tank.doDraw(canvas);
-					for (Element element : mElements) {
+					for (Element element : mElements)
+					{
 						element.doDraw(canvas);
 					}
-					if (poljeMetki.isEmpty() == false) {
-						for (Element element2 : poljeMetki) {
+					if (poljeMetki.isEmpty() == false)
+					{
+						for (Element element2 : poljeMetki)
+						{
 							element2.doDraw(canvas);
 						}
 					}
@@ -165,10 +170,12 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				barvaLifa.setColor(Color.rgb(255, 204, 153));
 			if (healthBar <= 50)
 				barvaLifa.setColor(Color.RED);
-			if (healthBar != 0 && healthBar > 0) {
+			if (healthBar != 0 && healthBar > 0)
+			{
 				canvas.drawLine(10, 8, healthBar, 8, barvaLifa);
 			}
-			if (healthBar == 0 || healthBar < 0) {
+			if (healthBar == 0 || healthBar < 0)
+			{
 				konec = true;
 			}
 			Paint barvaOkvira = new Paint();
@@ -179,70 +186,74 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			canvas.drawLine(9, 3, 9, 12, barvaOkvira);
 			canvas.drawLine(201, 3, 201, 12, barvaOkvira);
 			canvas.drawText("" + tocke, mWidth - 65, 20, mPaint);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		// mWidth = width;
-		// mHeight = height;
+			int height)
+	{
+
 	}
 
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		if (!mThread.isAlive()) {
+	public void surfaceCreated(SurfaceHolder holder)
+	{
+		if (!mThread.isAlive())
+		{
 			mThread = new ViewThread(this);
 			mThread.setRunning(true);
 			mThread.start();
 		}
+		finish();
 	}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		if (mThread.isAlive()) {
+	public void surfaceDestroyed(SurfaceHolder holder)
+	{
+		if (mThread.isAlive())
+		{
 			mThread.setRunning(false);
 		}
+		
 	}
 
-	@SuppressWarnings("static-access")
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		synchronized (mElements) {
-			// mElementNumber = mElements.size();
-
-			if (event.getAction() == event.ACTION_DOWN) {
-
-			}
-		}
-		return super.onTouchEvent(event);
-	}
-
-	public void animate(long elapsedTime) {
-		synchronized (mElements) {
-			try {
-				if (health != null) {
+	public void animate(long elapsedTime)
+	{
+		synchronized (mElements)
+		{
+			try
+			{
+				if (health != null)
+				{
 					health.animate(elapsedTime);
 				}
-				if (ammo != null) {
+				if (ammo != null)
+				{
 					ammo.animate(elapsedTime);
 				}
-				if (mElements.isEmpty() == false) {
-					for (int i = 0; i < mElements.size(); i++) {
+				if (mElements.isEmpty() == false)
+				{
+					for (int i = 0; i < mElements.size(); i++)
+					{
 						Element a = mElements.get(i);
 						a.animate(elapsedTime);
 						if (a.getX() + a.slikaX * 2 <= 0
-								|| a.getX() - a.slikaX >= mWidth||a.getY() + a.slikaY * 2 <= 0||a.getY() - a.slikaY >= mHeight) {
+								|| a.getX() - a.slikaX >= mWidth
+								|| a.getY() + a.slikaY * 2 <= 0
+								|| a.getY() - a.slikaY >= mHeight)
+						{
 							mElements.remove(i);
 						}
 						colision(a, i);
 					}
 				}
 				tank.animate(elapsedTime);
-				if (poljeMetki.isEmpty() == false) {
-					for (int i = 0; i < poljeMetki.size(); i++) {
+				if (poljeMetki.isEmpty() == false)
+				{
+					for (int i = 0; i < poljeMetki.size(); i++)
+					{
 						Element a = poljeMetki.get(i);
 						a.animate(elapsedTime);
 						if (a.mY <= 10 || a.mX < 0 - 10 || a.mX > mWidth + 10)
@@ -258,15 +269,20 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 					tank.mY = mHeight - (tank.slikaY + tank.slikaY / 2);
 				if (tank.getY() < 0)
 					tank.mY = 0;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				e.printStackTrace();
 			}
 		}
+
 	}
 
-	public void colision(Element x, int i) {
+	public void colision(Element x, int i)
+	{
 
-		try {
+		try
+		{
 			if ((Math.abs(x.getY() - tank.getY() - 10) < 70.0)
 					&& (Math.abs(x.getX() - (tank.getX() + 10)) < 40.0))
 
@@ -274,35 +290,43 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				mElements.remove(i);
 				tocke += mElements.get(i).getPoints();
 				healthBar -= 50;
-				Tutorial2D.vibriraj=true;
+				Tutorial2D.vibriraj = true;
 			}
-			if (health != null) {
+			if (health != null)
+			{
 				if ((Math.abs(health.getY() - tank.getY() - 10) < 70.0)
-						&& (Math.abs(health.getX() - (tank.getX() + 10)) < 40.0)) {
-					if (healthBar < 200) {
+						&& (Math.abs(health.getX() - (tank.getX() + 10)) < 40.0))
+				{
+					if (healthBar < 200)
+					{
 						healthBar += 50;
 					}
 					health = null;
 
 				}
 			}
-			if (ammo != null) {
+			if (ammo != null)
+			{
 				if ((Math.abs(ammo.getY() + ammo.slikaY - tank.getY() - 10) < 70.0)
 						&& (Math.abs(ammo.getX() + ammo.slikaX
-								- (tank.getX() + 10)) < 40.0)) {
+								- (tank.getX() + 10)) < 40.0))
+				{
 					bonusMetki = true;
 					ammo = null;
 					metkiOn = System.currentTimeMillis();
 
 				}
 			}
-			for (int y = 0; y < poljeMetki.size(); y++) {
+			for (int y = 0; y < poljeMetki.size(); y++)
+			{
 				Element a = poljeMetki.get(y);
 				if ((Math.abs(x.getY() - a.getY()) < 50.0)
-						&& (Math.abs(x.getX() - (a.getX())) < 20.0)) {
+						&& (Math.abs(x.getX() - (a.getX())) < 20.0))
+				{
 					Random m = new Random();
 					int z = m.nextInt(100) + 1;
-					if (z % 20 == 0) {
+					if (z % 20 == 0)
+					{
 						if (health == null)
 							health = new Element(getResources(),
 									(int) (mElements.get(i).mX + mElements
@@ -312,7 +336,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 					}
 					Random m1 = new Random();
 					int z1 = m1.nextInt(50) + 1;
-					if (z1 % 15 == 0) {
+					if (z1 % 15 == 0)
+					{
 						if (ammo == null)
 							ammo = new Element(getResources(),
 									(int) (mElements.get(i).mX + mElements
@@ -327,9 +352,30 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				}
 
 			}
-		} catch (Exception e) {
+
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 
+	}
+
+	public  boolean finish()
+	{
+		if (Panel.konec)
+		{
+			rezultat a = new rezultat(dobiTocke(), "test");
+			app2.add(a);
+			app2.dobi(a);
+			Intent moj2 = new Intent(Context2, StevecListActivity.class);
+			Context2.startActivity(moj2);
+			((Activity) Context2).finish();
+			Panel.mElements.clear();
+			Panel.poljeMetki.clear();
+			Panel.konec = false;
+			return false;
+		}
+		return true;
 	}
 }
