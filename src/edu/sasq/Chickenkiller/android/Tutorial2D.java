@@ -6,11 +6,8 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import edu.sasq.Chickenkiller.android.ApplicationExample;
-import edu.sasq.Chickenkiller.android.StevecListActivity;
-import edu.sasq.Chickenkiller.android.rezultat;
 
 import android.app.Activity;
-import android.app.WallpaperInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -20,7 +17,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.PowerManager;
 import android.os.Vibrator;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,7 +27,7 @@ public class Tutorial2D extends Activity {
 	public ApplicationExample app2;
 	public static String player_name = "";
 	Panel app;
-	Context ab;
+	public static Context ab;
 	public static boolean cancel;
 	public static boolean arry;
 	public static boolean hitri;
@@ -69,20 +65,27 @@ public class Tutorial2D extends Activity {
 				Panel.senzor = 4;
 			else
 				Panel.senzor = 0;
+			
+			
+			if(vibriraj)
+			{
+				v.vibrate(200);
+				vibriraj=false;
+			}
 		}
 
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 	};
-	public Odstevanje stej = null;
+	//public Odstevanje stej = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		stej = new Odstevanje(30000, 1000);
+	//	stej = new Odstevanje(30000, 1000);
 		koncaj = false;
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		sSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -97,7 +100,8 @@ public class Tutorial2D extends Activity {
 		Panel.konec = false;
 		 vibriraj=false;
 		 v= (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		setContentView(new Panel(this));
+		setContentView(new Panel(this,app2));
+		/*
 		nitkica = new Thread(new Runnable() {
 
 			@Override
@@ -114,27 +118,16 @@ public class Tutorial2D extends Activity {
 						Panel.poljeMetki.clear();
 						arry = false;
 					}
-					if(vibriraj)
-					{
-						v.vibrate(200);
-						vibriraj=false;
-					}
-					if (koncaj) {
-						arry = false;
-						Panel.mElements.clear();
-						Panel.poljeMetki.clear();
-					}
 				}
 			}
 		});
-		nitkica.start();
+		nitkica.start();*/
 	}
-
 	public static String getTimer() {
 
 		return timer;
 	}
-
+/*
 	public class Odstevanje extends CountDownTimer {
 
 		private boolean stop;
@@ -155,7 +148,7 @@ public class Tutorial2D extends Activity {
 			 * ab.startActivity(moj2); finish(); Panel.mElements.clear();
 			 * Panel.poljeMetki.clear(); } arry=false;
 			 */
-		}
+	/*	}
 
 		@Override
 		public void onTick(long millisUntilFinished) {
@@ -207,7 +200,7 @@ public class Tutorial2D extends Activity {
 			return stop;
 		}
 
-	}
+	}*/
 
 	@Override
 	protected void onResume() {
@@ -227,7 +220,7 @@ public class Tutorial2D extends Activity {
 
 	@Override
 	protected void onDestroy() {
-
+		sSensorManager.unregisterListener(sSensorListener);
 		koncaj = true;
 		super.onDestroy();
 	}

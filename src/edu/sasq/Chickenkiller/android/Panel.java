@@ -3,20 +3,22 @@ package edu.sasq.Chickenkiller.android;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
-import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
+	public Context Context2;
 	public static long timeNow;
 	public static long timeNow2;
 	public static long timeBefor;
@@ -39,12 +41,15 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	public Element ammo;
 	public Bitmap slika;
 	public static boolean konec = false;
+	public ApplicationExample app2;
 
 	private Paint mPaint = new Paint();
 	public Paint barvaLifa = new Paint();
 
-	public Panel(Context context) {
+	public Panel(Context context,Application app3) {
 		super(context);
+		app2 =(ApplicationExample) app3;
+		Context2=context;
 		getHolder().addCallback(this);
 		slika = BitmapFactory.decodeResource(getResources(), R.drawable.snow2);
 		bonusMetki = false;
@@ -67,6 +72,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	public void doDraw(long elapsed, Canvas canvas) {
+		
+		if (Panel.konec) {
+			rezultat a = new rezultat(dobiTocke(), "test");
+			app2.add(a);
+			app2.dobi(a);
+			Intent moj2 = new Intent(Context2, StevecListActivity.class);
+			Context2.startActivity(moj2);
+			((Activity) Context2).finish();
+			Panel.mElements.clear();
+			Panel.poljeMetki.clear();
+		}
 		try {
 			tank.mSpeedX = senzor;
 			tank.mSpeedY = sensorY;
@@ -164,7 +180,6 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			canvas.drawLine(201, 3, 201, 12, barvaOkvira);
 			canvas.drawText("" + tocke, mWidth - 65, 20, mPaint);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -313,7 +328,6 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
